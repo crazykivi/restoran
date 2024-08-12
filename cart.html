@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страницы</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .cart .container {
+            margin-top: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .cart-item img {
+            max-width: 100px;
+        }
+
+        .cart-item div {
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-controls input {
+            width: 50px;
+            text-align: center;
+        }
+
+        .quantity-controls button {
+            background-color: #555;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 0 5px;
+        }
+
+        .quantity-controls button:hover {
+            background-color: #333;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .checkout-button:hover {
+            background-color: #333;
+        }
+
+        .center-wrapper {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container.order {
+            margin-top: -100px;
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        #reservationForm input {
+            width: 97%;
+        }
+
+        .quantity-controls input {
+            width: 95%;
+        }
+
+        .checkout-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: calc(100% - 50px);
+        }
+
+        .checkout-button.disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .cart-item .delete-button {
+            width: 30%;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+        }
+
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox input[type="checkbox"] {
+            flex: 0 0 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .checkbox label {
+            flex-grow: 1;
+        }
+
+        .active-order-container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 350px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .active-order-container h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .active-order-container p {
+            margin: 5px 0;
+        }
+
+        .active-order-container p strong {
+            display: inline-block;
+            width: 150px;
+        }
+
+        .active-order-container .order-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .active-order-container .order-info .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .active-order-container .order-info .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .active-order-container .order-info .order-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .active-order-container .order-info .order-item .item-details {
+            flex-grow: 1;
+        }
+
+        .active-order-container .order-info .order-item .item-details p {
+            margin: 0;
+        }
+
+        .active-order-container .order-info .order-item .item-details .item-name {
+            font-weight: bold;
+        }
+
+        .active-order-container .order-info .order-item .item-details .item-price {
+            color: #888;
+        }
+
+        .active-order-container .total-price {
+            text-align: right;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .active-order-container .time-remaining {
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        #orderType {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            background-color: #f9f9f9;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4zM2 5L0 3h4z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 10px 10px;
+            cursor: pointer;
+        }
+
+        #orderType:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="header">
+        <a href="index">
+            <div class="logo"><img src="img/logo.png"></div>
+        </a>
+        <div class="nav-links">
+            <a href="index">Главная страница</a>
+            <a href="menu">Меню</a>
+            <a href="booking">Забронировать</a>
+            <a href="about">О нас</a>
+            <a href="review">Отзывы</a>
+            <a href="cart">Корзина</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+    </div>
+
+    <div class="cart">
+        <div class="container">
+            <h1>Корзина</h1>
+            <div id="cartItems"></div>
+            <div id="totalPrice"></div>
+            <p id="emptyCartMessage" style="display: none;">Ваша корзина пуста.</p>
+            <a href="#" class="checkout-button" id="checkoutButton" onclick="showCheckout()">Оформить заказ</a>
+        </div>
+    </div>
+
+    <div class="center-wrapper" id="checkoutFormContainer" style="display: none;">
+        <div class="container order">
+            <button class="close-button" onclick="hideCheckout()">×</button>
+            <h1>Онлайн заказ</h1>
+            <p>Если вы не хотите делать заказ самому, вы можете позвонить по телефону +7 (999) 999-99-99</p>
+            <form id="reservationForm" action="#" method="post">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" name="name" placeholder="Имя" pattern="[A-Za-zА-Яа-яЁё ]+"
+                    title="Только буквы и пробелы" required>
+
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" placeholder="Номер телефона" required pattern="\+7\d{10}"
+                    maxlength="12" title="Формат номера: +79999999999">
+
+                <label for="orderType">Тип заказа</label>
+                <select id="orderType" name="orderType" required onchange="toggleDeliveryAddress()">
+                    <option value="Самовывоз">Самовывоз</option>
+                    <option value="Доставка">Доставка</option>
+                </select>
+
+                <div id="deliveryAddressContainer" style="display: none;">
+                    <label for="deliveryAddress">Адрес доставки</label>
+                    <input type="text" id="deliveryAddress" name="deliveryAddress" placeholder="Адрес доставки">
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">Я подтверждаю свое согласие на обработку персональных данных</label>
+                </div>
+
+                <button type="button" onclick="submitForm()">Оформить заказ</button>
+            </form>
+        </div>
+    </div>
+    <div id="activeOrder" class="active-order-container"></div>
+    <div class="booking-section hidden">
+    </div>
+    <footer class="footer">
+        <div class="info">
+            Приглашаем вас в "Симфония вкусов" — ресторан, где дух Севера оживает в каждой детали.
+        </div>
+        <div class="nav-links-footer">
+            <a href="#">Главная страница</a>
+            <a href="#">Меню</a>
+            <a href="#">Забронировать</a>
+            <a href="#">О нас</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Корзина</a>
+        </div>
+        <div class="hours">
+            Понедельник - Пятница: 10:00 - 22:00 <br>
+            Суббота - Воскресенье: 12:00 - 24:00
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.getElementById('phone').addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,2})(\d{0,2})/);
+            if (e.target.value.length < 2) {
+                e.target.value = '+7';
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadCart();
+            loadActiveOrder();
+
+            document.getElementById('reservationForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                submitForm();
+            });
+        });
+
+        function loadCart() {
+            fetch('functions/get_cart.php')
+                .then(response => response.json())
+                .then(data => {
+                    const cartItemsContainer = document.getElementById('cartItems');
+                    const checkoutButton = document.querySelector('.checkout-button');
+                    cartItemsContainer.innerHTML = '';
+                    let total = 0;
+
+                    if (data.length === 0) {
+                        cartItemsContainer.innerHTML = '<p>Ваша корзина пуста</p>';
+                        checkoutButton.style.display = 'none';
+                    } else {
+                        checkoutButton.style.display = 'block';
+                        data.forEach(item => {
+                            const cartItem = document.createElement('div');
+                            cartItem.className = 'cart-item';
+
+                            cartItem.innerHTML = `
+                            <img src="${item.image_url}" alt="${item.product_name}">
+                            <div>
+                                <p>${item.product_name}</p>
+                                <p class="price" style='margin-top:-10px;'>${item.price},-</p>
+                            </div>
+                            <div class="quantity-controls">
+                                <input type="number" value="${item.quantity}" min="1" max="10" onchange="updateQuantity(${item.id}, ${item.product_id}, ${item.price}, 0, this.value)">
+                            </div>
+                            <button class="delete-button" onclick="removeFromCart(${item.id})">Удалить</button>
+                        `;
+
+                            cartItemsContainer.appendChild(cartItem);
+                            total += item.price * item.quantity;
+                        });
+
+                        document.getElementById('totalPrice').textContent = `Итого: ${total} Руб~`;
+                    }
+                })
+                .catch(error => console.error('Error loading cart:', error));
+        }
+
+        function loadActiveOrder() {
+            fetch('functions/get_active_order.php')
+                .then(response => response.json())
+                .then(data => {
+                    const activeOrderContainer = document.getElementById('activeOrder');
+                    if (data) {
+                        let orderInfo = `
+                    <h2>Ваш активный заказ</h2>
+                    <div class="order-info">
+                        <p><strong>Имя:</strong> ${data.name}</p>
+                        <p><strong>Телефон:</strong> ${data.phone}</p>
+                        <p><strong>Тип заказа:</strong> ${data.order_type}</p>
+                `;
+
+                        if (data.order_type === 'Доставка') {
+                            orderInfo += `<p><strong>Адрес доставки:</strong> ${data.delivery_address}</p>`;
+                        }
+
+                        orderInfo += `
+                        <p><strong>Состояние заказа:</strong> ${data.status}</p>
+                        <p><strong>Итого:</strong> ${data.total_price} Руб</p>
+                `;
+
+                        if (data.ready_by) {
+                            orderInfo += `
+                        <p><strong>Примерное время доставки:</strong> <span class="time-remaining"></span></p>
+                        <div class="timer" data-ready-by="${data.ready_by}"></div>
+                    `;
+                        }
+
+                        orderInfo += '</div>';
+
+                        activeOrderContainer.innerHTML = orderInfo;
+                        updateTimers();
+                        setInterval(updateTimers, 1000);
+                    }
+                    else {
+                        activeOrderContainer.innerHTML = '<p>У вас нет активных заказов.</p>';
+                    }
+                })
+                .catch(error => console.error('Error loading active order:', error));
+        }
+
+        function updateTimers() {
+            document.querySelectorAll('.timer').forEach(timer => {
+                const readyBy = new Date(timer.dataset.readyBy).getTime();
+                const now = new Date().getTime();
+                const distance = readyBy - now;
+
+                if (distance < 0) {
+                    timer.previousElementSibling.querySelector('.time-remaining').innerText = 'Время истекло';
+                    return;
+                }
+
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                timer.previousElementSibling.querySelector('.time-remaining').innerText = `${hours}ч ${minutes}м ${seconds}с`;
+            });
+        }
+
+        function hideCheckout() {
+            document.getElementById('checkoutFormContainer').style.display = 'none';
+        }
+
+        function updateQuantity(id, product_id, price, change, newQuantity) {
+            if (change !== 0) {
+                newQuantity = parseInt(document.querySelector(`input[value="${id}"]`).value) + change;
+            }
+
+            if (newQuantity < 1 || newQuantity > 10) return;
+
+            fetch('functions/update_cart.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id=${id}&product_id=${product_id}&quantity=${newQuantity}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        loadCart();
+                    } else {
+                        alert('Ошибка обновления количества');
+                    }
+                })
+                .catch(error => console.error('Error updating cart:', error));
+        }
+
+        function removeFromCart(id) {
+            fetch('functions/remove_from_cart.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id=${id}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        loadCart();
+                    } else {
+                        alert('Ошибка удаления товара из корзины');
+                    }
+                })
+                .catch(error => console.error('Error removing from cart:', error));
+        }
+
+        function showCheckout() {
+            document.getElementById('checkoutFormContainer').style.display = 'flex';
+        }
+
+        function submitForm() {
+            const form = document.getElementById('reservationForm');
+            const formData = new FormData(form);
+
+            fetch('functions/submit_order.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Заказ успешно оформлен!');
+                        document.getElementById('checkoutFormContainer').style.display = 'none';
+                        loadCart();
+                        loadActiveOrder(); // Обновляем активные заказы
+                    } else {
+                        alert('Ошибка при оформлении заказа');
+                    }
+                })
+                .catch(error => console.error('Error submitting order:', error));
+        }
+    </script>
+    <script>
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        const logo = document.querySelector('.logo');
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth >= 1000) {
+                if (scrollTop > lastScrollTop) {
+                    header.classList.add('header-hide');
+                    logo.style.opacity = 0;
+                } else {
+                    header.classList.remove('header-hide');
+                    logo.style.opacity = 1;
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+    <script>
+        function scrollToWithOffset(selector, offset) {
+            const element = document.querySelector(selector);
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            const header = document.querySelector('.header');
+            header.style.transform = 'translateY(0)';
+            function checkVisibility() {
+                const bookingSection = document.querySelector(".booking-section");
+                const boundingBooking = bookingSection.getBoundingClientRect();
+
+                if (boundingBooking.top < window.innerHeight) {
+                    bookingSection.classList.remove("hidden");
+                    bookingSection.classList.add("visible");
+                    window.removeEventListener("scroll", checkVisibility);
+                }
+
+                document.querySelectorAll(".service, .section").forEach(element => {
+                    const bounding = element.getBoundingClientRect();
+
+                    if (bounding.top < window.innerHeight - 250) {
+                        element.classList.remove("hidden");
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            const bookingSection = document.querySelector(".booking-section");
+            bookingSection.classList.add("hidden");
+
+            document.querySelectorAll(".service, .section").forEach(element => element.classList.add("hidden"));
+
+            checkVisibility();
+            window.addEventListener("scroll", checkVisibility);
+        };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('show');
+            });
+
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateWidth() {
+                if (window.innerWidth <= 1000) {
+                    navLinks.style.width = (window.innerWidth + 1) + "px";
+                } else {
+                    navLinks.style.width = "";
+                }
+            }
+
+            updateWidth();
+            window.addEventListener("resize", updateWidth);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateVisibility() {
+                const screenWidth = window.innerWidth;
+
+                if (screenWidth > 1000) {
+
+                    const navLinksOpacity = getComputedStyle(navLinks).opacity;
+
+                    if (navLinksOpacity !== "1") {
+                        navLinks.style.opacity = "0";
+
+                        setTimeout(() => {
+                            navLinks.style.opacity = "1";
+                        }, 300);
+                    }
+                } else {
+                    if (navLinks) {
+                        navLinks.style.opacity = "";
+                    }
+                }
+            }
+
+            updateVisibility();
+
+            window.addEventListener("resize", updateVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logo = document.querySelector(".logo");
+            const menuToggle = document.querySelector(".menu-toggle");
+            const screenWidth = window.innerWidth;
+
+            if (logo) {
+                setTimeout(() => {
+
+                    logo.style.opacity = "1";
+                    menuToggle.style.display = "block";
+                }, 300);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const overlay = document.querySelector(".background");
+
+            if (overlay) {
+
+                overlay.style.opacity = "0";
+
+                setTimeout(() => {
+                    overlay.remove();
+                }, 1000);
+            }
+        });
+    </script>
+    <script>
+        function toggleDeliveryAddress() {
+            const orderType = document.getElementById('orderType').value;
+            const deliveryAddressContainer = document.getElementById('deliveryAddressContainer');
+            if (orderType === 'Доставка') {
+                deliveryAddressContainer.style.display = 'block';
+            } else {
+                deliveryAddressContainer.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

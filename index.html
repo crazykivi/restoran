@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страницы</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="header">
+        <a href="index">
+            <div class="logo"><img src="img/logo.png"></div>
+        </a>
+        <div class="nav-links">
+            <a href="index">Главная страница</a>
+            <a href="menu">Меню</a>
+            <a href="booking">Забронировать</a>
+            <a href="about">О нас</a>
+            <a href="review">Отзывы</a>
+            <a href="cart">Корзина</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <div></div>
+    </div>
+    <div class="info-container">
+        <div class="parallax"></div>
+        <div class="overlay"></div>
+        <div class="info-container-text" data-aos="fade-down">Приглашаем вас в "Симфония вкусов" — ресторан, где дух
+            Севера
+            оживает в каждой детали.</div>
+        <!--
+        <a href="menu" class="button left">Расписание</a>
+        <a href="booking" class="button right">Записаться</a>
+        -->
+    </div>
+    <div class="services-container">
+        <h1>Приглашаем вас в "Симфония вкусов" — ресторан, где дух Севера
+            оживает в каждой детали.</h1>
+        <div class="services-grid">
+            <div class="service hidden">
+                <img src="img/image1.webp" alt="Картинка ресторана">
+            </div>
+            <div class="service hidden">
+                <p>Особенностью нашего ресторана является открытый бар с широким ассортиментом напитков, от классических
+                    коктейлей до эксклюзивных северных настоек. Барная стойка, выполненная из натурального дерева,
+                    приглашает гостей насладиться моментом отдыха в приятной атмосфере.</p>
+            </div>
+        </div>
+        <div class="services-gridis">
+            <div class="service left hidden pc">
+                <img src="img/landscape.webp" alt="Картинка ресторана">
+            </div>
+            <div class="service left hidden pc">
+                <p>В нашем ресторане мы стараемся воссоздать не просто атмосферу уюта, но и ощущение пребывания на
+                    открытой зимней природе. Мы хотим, чтобы вы чувствовали себя так, как будто находитесь где-то в
+                    глубине снежных лесов, настолько реалистично мы подошли к созданию этой атмосферы.</p>
+            </div>
+        </div>
+    </div>
+    <div class="name-gallery">
+        <h1>Галерея</h1>
+    </div>
+    <div id="gallery">
+        <div class="thumbnail" onclick="openFullscreen('img/menu/siberian-plate.webp')">
+            <img src="img/menu/siberian-plate.webp" alt="Image 1">
+        </div>
+        <div class="thumbnail" onclick="openFullscreen('img/menu/dumplings.webp')">
+            <img src="img/menu/dumplings.webp" alt="Image 2">
+        </div>
+        <div class="thumbnail" onclick="openFullscreen('img/menu/winter-soup.webp')">
+            <img src="img/menu/winter-soup.webp" alt="Image 2">
+        </div>
+        <div class="thumbnail" onclick="openFullscreen('img/menu/medovik.webp')">
+            <img src="img/menu/medovik.webp" alt="Image 2">
+        </div>
+        <div class="thumbnail" onclick="openFullscreen('img/menu/sturgeon-kebabs.webp')">
+            <img src="img/menu/sturgeon-kebabs.webp" alt="Image 2">
+        </div>
+        <div class="thumbnail" onclick="openFullscreen('img/background.webp')">
+            <img src="img/background.webp" alt="Image 2">
+        </div>
+        <div class="thumbnail" onclick="openFullscreen('img/welcome.webp')">
+            <img src="img/welcome.webp" alt="Image 2">
+        </div>
+    </div>
+    <div id="fullscreen-container" class="fullscreen-container" onclick="closeFullscreen()">
+        <div id="fullscreen" class="fullscreen">
+            <span onclick="closeFullscreen()"
+                style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 24px; color: white;">&#x2716;</span>
+            <img id="fullscreen-img" src="" alt="Fullscreen Image">
+        </div>
+    </div>
+    <div class="booking-section hidden">
+    </div>
+    <footer class="footer">
+        <div class="info">
+            Приглашаем вас в "Симфония вкусов" — ресторан, где дух Севера оживает в каждой детали.
+        </div>
+        <div class="nav-links-footer">
+            <a href="#">Главная страница</a>
+            <a href="#">Меню</a>
+            <a href="#">Забронировать</a>
+            <a href="#">О нас</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Корзина</a>
+        </div>
+        <div class="hours">
+            Понедельник - Пятница: 10:00 - 22:00 <br>
+            Суббота - Воскресенье: 12:00 - 24:00
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        function openFullscreen(imageSrc) {
+            document.getElementById('fullscreen-img').src = imageSrc;
+            document.getElementById('fullscreen-container').style.display = 'flex';
+        }
+
+        function closeFullscreen() {
+            document.getElementById('fullscreen-container').style.display = 'none';
+        }
+    </script>
+    <script>
+        /*
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('header-hide');
+            } else {
+                header.classList.remove('header-hide');
+            }
+            lastScrollTop = scrollTop;
+        });
+        */
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        const logo = document.querySelector('.logo');
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth >= 1000) {
+                if (scrollTop > lastScrollTop) {
+                    header.classList.add('header-hide');
+                    logo.style.opacity = 0;
+                } else {
+                    header.classList.remove('header-hide');
+                    logo.style.opacity = 1;
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+    <script>
+        AOS.init();
+
+        window.onscroll = function () {
+            const scrollY = window.scrollY;
+            const parallax = document.querySelector('.parallax');
+
+            parallax.style.backgroundPositionY = `${scrollY * 0.20}px`;
+        };
+    </script>
+    <script>
+        function scrollToWithOffset(selector, offset) {
+            const element = document.querySelector(selector);
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            const header = document.querySelector('.header');
+            header.style.transform = 'translateY(0)';
+            function checkVisibility() {
+                const bookingSection = document.querySelector(".booking-section");
+                const boundingBooking = bookingSection.getBoundingClientRect();
+
+                if (boundingBooking.top < window.innerHeight) {
+                    bookingSection.classList.remove("hidden");
+                    bookingSection.classList.add("visible");
+                    window.removeEventListener("scroll", checkVisibility);
+                }
+
+                document.querySelectorAll(".service, .section").forEach(element => {
+                    const bounding = element.getBoundingClientRect();
+
+                    if (bounding.top < window.innerHeight - 250) {
+                        element.classList.remove("hidden");
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            const bookingSection = document.querySelector(".booking-section");
+            bookingSection.classList.add("hidden");
+
+            document.querySelectorAll(".service, .section").forEach(element => element.classList.add("hidden"));
+
+            checkVisibility();
+            window.addEventListener("scroll", checkVisibility);
+        };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('show');
+            });
+
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            function checkVisibility() {
+                let delay = 0;
+
+                thumbnails.forEach((thumbnail, index) => {
+                    if (!thumbnail.classList.contains('animated')) {
+                        const bounds = thumbnail.getBoundingClientRect();
+
+                        if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+                            setTimeout(() => {
+                                thumbnail.classList.add('visible-gallery');
+                                thumbnail.classList.add('animated');
+                            }, 100 * delay++);
+                        }
+                    }
+                });
+            }
+            checkVisibility();
+
+            window.addEventListener('scroll', checkVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateWidth() {
+                if (window.innerWidth <= 1000) {
+                    navLinks.style.width = (window.innerWidth + 1) + "px";
+                } else {
+                    navLinks.style.width = "";
+                }
+            }
+
+            updateWidth();
+            window.addEventListener("resize", updateWidth);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateVisibility() {
+                const screenWidth = window.innerWidth;
+
+                if (screenWidth > 1000) {
+
+                    const navLinksOpacity = getComputedStyle(navLinks).opacity;
+
+                    if (navLinksOpacity !== "1") {
+                        navLinks.style.opacity = "0";
+
+                        setTimeout(() => {
+                            navLinks.style.opacity = "1";
+                        }, 300);
+                    }
+                } else {
+                    if (navLinks) {
+                        navLinks.style.opacity = "";
+                    }
+                }
+            }
+
+            updateVisibility();
+
+            window.addEventListener("resize", updateVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logo = document.querySelector(".logo");
+            const menuToggle = document.querySelector(".menu-toggle");
+            const screenWidth = window.innerWidth;
+
+            if (logo) {
+                setTimeout(() => {
+
+                    logo.style.opacity = "1";
+                    menuToggle.style.display = "block";
+                }, 300);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const overlay = document.querySelector(".background");
+
+            if (overlay) {
+
+                overlay.style.opacity = "0";
+
+                setTimeout(() => {
+                    overlay.remove();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>

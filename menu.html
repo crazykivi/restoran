@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="header">
+        <a href="index">
+            <div class="logo"><img src="img/logo.png"></div>
+        </a>
+        <div class="nav-links">
+            <a href="index">Главная страница</a>
+            <a href="menu">Меню</a>
+            <a href="booking">Забронировать</a>
+            <a href="about">О нас</a>
+            <a href="review">Отзывы</a>
+            <a href="cart">Корзина</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <div></div>
+    </div>
+    <!--
+    <div class="menu-separation">
+        <h1>Основные блюда</h1>
+    </div>
+    <div class="menu-section">
+        <div class="menu-item">
+            <img src="img/menu/dumplings.webp" alt="Тартар из говядины">
+            <div class="menu-description">
+                <p>Пельмени с мясной начинкой</p>
+                <p class="price">580,-</p>
+                <button onclick="addToCart(1, 'Пельмени с мясной начинкой', 580)">Добавить в корзину</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/siberian-plate.webp" alt="Зимняя тарелка">
+            <div class="menu-description">
+                <p>Зимняя тарелка</p>
+                <p class="price">780,-</p>
+                <button onclick="addToCart(2, 'Зимняя тарелка', 780)">Добавить в корзину</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/winter-soup.webp" alt="Зимний суп">
+            <div class="menu-description">
+                <p>Зимний суп</p>
+                <p class="price">550,-</p>
+                <button onclick="addToCart(3, 'Зимний суп', 550)">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+    <div class="menu-section further">
+        <div class="menu-item">
+            <img src="img/menu/smoked-omul-fish.webp" alt="Копченая рыба омуль с Байкала">
+            <div class="menu-description">
+                <p>Копченая рыба омуль с Байкала</p>
+                <p class="price">550,-</p>
+                <button onclick="addToCart(4, 'Копченая рыба омуль с Байкала', 550)">Добавить в корзину</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/sturgeon-kebabs.webp" alt="Шашлык из осетрины">
+            <div class="menu-description">
+                <p>Шашлык из осетрины</p>
+                <p class="price">850,-</p>
+                <button onclick="addToCart(5, 'Шашлык из осетрины', 850)">Добавить в корзину</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/northern_lights.webp" alt="Северное сияние">
+            <div class="menu-description">
+                <p>Северное сияние</p>
+                <p class="price">1450,-</p>
+                <button onclick="addToCart(6, 'Шашлык из осетрины', 850)">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+    <div class="menu-separation further">
+        <h1>Десерты</h1>
+    </div>
+    <div class="menu-section further">
+        <div class="menu-item">
+            <img src="img/menu/medovik.webp" alt="Медовик">
+            <div class="menu-description">
+                <p>Медовик</p>
+                <p class="price">580,-</p>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/cheesecakes.webp" alt="Чизкейк">
+            <div class="menu-description">
+                <p>Чизкейк</p>
+                <p class="price">780,-</p>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/arctic_whisper.webp" alt="Чизкейк">
+            <div class="menu-description">
+                <p>Arctic Whisper</p>
+                <p class="price">850 ,-</p>
+            </div>
+        </div>
+    </div>
+    <div class="menu-separation further">
+        <h1>Напитки</h1>
+    </div>
+    <div class="menu-section further">
+        <div class="menu-item">
+            <img src="img/menu/Winter-Whispe.webp" alt="Зимний Сплетень ">
+            <div class="menu-description">
+                <p>Зимний Сплетень </p>
+                <p class="price">450,-</p>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/Forest-Dawn.webp" alt="Лесной Рассвет">
+            <div class="menu-description">
+                <p>Лесной Рассвет</p>
+                <p class="price">350,-</p>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="img/menu/Northern-Lights.webp" alt="Северное Сияние">
+            <div class="menu-description">
+                <p>Северное Сияние</p>
+                <p class="price">550 ,-</p>
+            </div>
+        </div>
+    </div>
+-->
+    <div id="menuContainer"></div>
+    <div class="booking-section hidden">
+    </div>
+    <footer class="footer">
+        <div class="info">
+            Приглашаем вас в "Симфония вкусов" — ресторан, где дух Севера оживает в каждой детали.
+        </div>
+        <div class="nav-links-footer">
+            <a href="#">Главная страница</a>
+            <a href="#">Меню</a>
+            <a href="#">Забронировать</a>
+            <a href="#">О нас</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Корзина</a>
+        </div>
+        <div class="hours">
+            Понедельник - Пятница: 10:00 - 22:00 <br>
+            Суббота - Воскресенье: 12:00 - 24:00
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('functions/loadProducts.php')
+                .then(response => response.json())
+                .then(data => {
+                    let currentCategory = '';
+                    const container = document.getElementById('menuContainer');
+                    let section;
+                    let itemCount = 0; // Счетчик элементов в текущем разделе
+                    let categoryCount = 0; // Счетчик категорий
+
+                    data.forEach(product => {
+                        if (currentCategory !== product.category) {
+                            if (section) {
+                                container.appendChild(section);
+                            }
+                            section = document.createElement('div');
+                            section.className = 'menu-section';
+                            itemCount = 0; // Сброс счетчика элементов
+
+                            var separation = document.createElement('div');
+                            separation.className = categoryCount === 0 ? 'menu-separation' : 'menu-separation further';
+                            separation.innerHTML = `<h1>${product.category}</h1>`;
+                            container.appendChild(separation);
+
+                            currentCategory = product.category;
+                            categoryCount++; // Увеличение счетчика категорий
+                        }
+
+                        if (itemCount >= 3) {
+                            container.appendChild(section);
+                            section = document.createElement('div');
+                            section.className = 'menu-section further';
+                            itemCount = 0;
+                        }
+
+                        const item = document.createElement('div');
+                        item.className = 'menu-item';
+                        item.innerHTML = `
+                            <img src="${product.image_url}" alt="${product.name}">
+                            <div class="menu-description">
+                                <p>${product.name}</p>
+                                <p class="price">${product.price},-</p>
+                                <p class="ingredients"><strong>Состав:</strong> ${product.ingredients}</p>
+                                <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Добавить в корзину</button>
+                            </div>
+                        `;
+                        section.appendChild(item);
+                        itemCount++; // Увеличение счетчика элементов
+                    });
+
+                    if (section) {
+                        container.appendChild(section);
+                    }
+                })
+                .catch(error => console.error('Error loading menu:', error));
+        });
+
+        function addToCart(productId, productName, price) {
+            const payload = {
+                productId,
+                productName,
+                price
+            };
+
+            fetch('functions/addToCart.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+    <script>
+        /*
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+ 
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('header-hide');
+            } else {
+                header.classList.remove('header-hide');
+            }
+            lastScrollTop = scrollTop;
+        });
+        */
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        const logo = document.querySelector('.logo');
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth >= 1000) {
+                if (scrollTop > lastScrollTop) {
+                    header.classList.add('header-hide');
+                    logo.style.opacity = 0;
+                } else {
+                    header.classList.remove('header-hide');
+                    logo.style.opacity = 1;
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            menuItems.forEach(item => {
+                item.addEventListener('touchstart', function () {
+                    // Удалить класс 'hover' с всех элементов
+                    menuItems.forEach(el => el.classList.remove('hover'));
+                    // Добавить класс 'hover' только текущему элементу
+                    item.classList.add('hover');
+                });
+
+                item.addEventListener('touchend', function () {
+                    // Удалить класс 'hover' через короткую задержку после окончания касания
+                    setTimeout(() => item.classList.remove('hover'), 500);
+                });
+            });
+
+            // Для десктопов поведение остаётся прежним
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', () => item.classList.add('hover'));
+                item.addEventListener('mouseleave', () => item.classList.remove('hover'));
+            });
+        });
+    </script>
+    <script>
+        function scrollToWithOffset(selector, offset) {
+            const element = document.querySelector(selector);
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            const header = document.querySelector('.header');
+            header.style.transform = 'translateY(0)';
+            function checkVisibility() {
+                const bookingSection = document.querySelector(".booking-section");
+                const boundingBooking = bookingSection.getBoundingClientRect();
+
+                if (boundingBooking.top < window.innerHeight) {
+                    bookingSection.classList.remove("hidden");
+                    bookingSection.classList.add("visible");
+                    window.removeEventListener("scroll", checkVisibility);
+                }
+
+                document.querySelectorAll(".service, .section").forEach(element => {
+                    const bounding = element.getBoundingClientRect();
+
+                    if (bounding.top < window.innerHeight - 250) {
+                        element.classList.remove("hidden");
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            const bookingSection = document.querySelector(".booking-section");
+            bookingSection.classList.add("hidden");
+
+            document.querySelectorAll(".service, .section").forEach(element => element.classList.add("hidden"));
+
+            checkVisibility();
+            window.addEventListener("scroll", checkVisibility);
+        };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('show');
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateWidth() {
+                if (window.innerWidth <= 1000) {
+                    navLinks.style.width = (window.innerWidth + 1) + "px";
+                } else {
+                    navLinks.style.width = "";
+                }
+            }
+
+            updateWidth();
+            window.addEventListener("resize", updateWidth);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateVisibility() {
+                const screenWidth = window.innerWidth;
+
+                if (screenWidth > 1000) {
+
+                    const navLinksOpacity = getComputedStyle(navLinks).opacity;
+
+                    if (navLinksOpacity !== "1") {
+                        navLinks.style.opacity = "0";
+
+                        setTimeout(() => {
+                            navLinks.style.opacity = "1";
+                        }, 300);
+                    }
+                } else {
+                    if (navLinks) {
+                        navLinks.style.opacity = "";
+                    }
+                }
+            }
+
+            updateVisibility();
+
+            window.addEventListener("resize", updateVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logo = document.querySelector(".logo");
+            const menuToggle = document.querySelector(".menu-toggle");
+            const screenWidth = window.innerWidth;
+
+            if (logo) {
+                setTimeout(() => {
+
+                    logo.style.opacity = "1";
+                    menuToggle.style.display = "block";
+                }, 300);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const overlay = document.querySelector(".background");
+
+            if (overlay) {
+
+                overlay.style.opacity = "0";
+
+                setTimeout(() => {
+                    overlay.remove();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>

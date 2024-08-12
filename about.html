@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="header">
+        <a href="index">
+            <div class="logo"><img src="img/logo.png"></div>
+        </a>
+        <div class="nav-links">
+            <a href="index">Главная страница</a>
+            <a href="menu">Меню</a>
+            <a href="booking">Забронировать</a>
+            <a href="about">О нас</a>
+            <a href="review">Отзывы</a>
+            <a href="cart">Корзина</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <div><button id="staffLoginBtn"
+                style="opacity: 0; position: absolute; top: 10px; left: 10px; width: 30px; height: 30px; border: none; cursor: pointer;">
+            </button>
+        </div>
+    </div>
+    <div class="services-container about">
+        <h1>О нас</h1>
+        <div class="services-grid">
+            <div class="service hidden">
+                <img src="img/welcome.webp" alt="Картинка ресторана">
+            </div>
+            <div class="service hidden">
+                <p>Мы рады приветствовать вас в нашем уютном уголке, где каждый гость может насладиться подлинным вкусом
+                    Сибири. Наш ресторан известен не только традиционной кулинарией, но и высоким уровнем обслуживания.
+                    Наш коллектив – это команда настоящих профессионалов, которые отдаются своему делу без остатка.</p>
+            </div>
+        </div>
+        <div class="services-gridis">
+            <div class="service left hidden pc">
+                <img src="img/staff.webp" alt="Картинка ресторана">
+            </div>
+            <div class="service left hidden pc">
+                <p>Мы верим, что кулинария – это искусство, и каждое блюдо в нашем меню готовится с особой тщательностью
+                    и любовью. Наши повара используют только самые свежие и качественные ингредиенты для создания блюд,
+                    которые порадуют вас не только вкусом, но и эстетикой подачи.</p>
+            </div>
+        </div>
+        <div class="services-grid">
+            <div class="service hidden">
+                <img src="img/welcome2.webp" alt="Картинка ресторана">
+            </div>
+            <div class="service hidden">
+                <p>Приходите и убедитесь сами в нашем мастерстве и преданности делу. Наша цель – сделать ваш визит
+                    идеальным, и мы с удовольствием заботимся о каждом госте, чтобы вы чувствовали себя как дома.
+
+                </p>
+            </div>
+        </div>
+        <h1>Ждем вас в Ресторане Сибирской кухни, чтобы вместе отпраздновать любовь к великолепной еде и уникальной
+            культуре!</h1>
+    </div>
+    <div class="booking-section hidden">
+    </div>
+    <footer class="footer">
+        <div class="info">
+            Приглашаем вас в "Симфония вкусов" — ресторан, где дух Севера оживает в каждой детали.
+        </div>
+        <div class="nav-links-footer">
+            <a href="#">Главная страница</a>
+            <a href="#">Меню</a>
+            <a href="#">Забронировать</a>
+            <a href="#">О нас</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Корзина</a>
+        </div>
+        <div class="hours">
+            Понедельник - Пятница: 10:00 - 22:00 <br>
+            Суббота - Воскресенье: 12:00 - 24:00
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.getElementById('staffLoginBtn').addEventListener('click', function () {
+            window.location.href = 'staff_login.html';
+        });
+    </script>
+    <script>
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        const logo = document.querySelector('.logo');
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth >= 1000) {
+                if (scrollTop > lastScrollTop) {
+                    header.classList.add('header-hide');
+                    logo.style.opacity = 0;
+                } else {
+                    header.classList.remove('header-hide');
+                    logo.style.opacity = 1;
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+    <script>
+        function scrollToWithOffset(selector, offset) {
+            const element = document.querySelector(selector);
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            const header = document.querySelector('.header');
+            header.style.transform = 'translateY(0)';
+            function checkVisibility() {
+                const bookingSection = document.querySelector(".booking-section");
+                const boundingBooking = bookingSection.getBoundingClientRect();
+
+                if (boundingBooking.top < window.innerHeight) {
+                    bookingSection.classList.remove("hidden");
+                    bookingSection.classList.add("visible");
+                    window.removeEventListener("scroll", checkVisibility);
+                }
+
+                document.querySelectorAll(".service, .section").forEach(element => {
+                    const bounding = element.getBoundingClientRect();
+
+                    if (bounding.top < window.innerHeight - 250) {
+                        element.classList.remove("hidden");
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            const bookingSection = document.querySelector(".booking-section");
+            bookingSection.classList.add("hidden");
+
+            document.querySelectorAll(".service, .section").forEach(element => element.classList.add("hidden"));
+
+            checkVisibility();
+            window.addEventListener("scroll", checkVisibility);
+        };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('show');
+            });
+
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            function checkVisibility() {
+                let delay = 0;
+
+                thumbnails.forEach((thumbnail, index) => {
+                    if (!thumbnail.classList.contains('animated')) {
+                        const bounds = thumbnail.getBoundingClientRect();
+
+                        if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+                            setTimeout(() => {
+                                thumbnail.classList.add('visible-gallery');
+                                thumbnail.classList.add('animated');
+                            }, 100 * delay++);
+                        }
+                    }
+                });
+            }
+            checkVisibility();
+
+            window.addEventListener('scroll', checkVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateWidth() {
+                if (window.innerWidth <= 1000) {
+                    navLinks.style.width = (window.innerWidth + 1) + "px";
+                } else {
+                    navLinks.style.width = "";
+                }
+            }
+
+            updateWidth();
+            window.addEventListener("resize", updateWidth);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateVisibility() {
+                const screenWidth = window.innerWidth;
+
+                if (screenWidth > 1000) {
+
+                    const navLinksOpacity = getComputedStyle(navLinks).opacity;
+
+                    if (navLinksOpacity !== "1") {
+                        navLinks.style.opacity = "0";
+
+                        setTimeout(() => {
+                            navLinks.style.opacity = "1";
+                        }, 300);
+                    }
+                } else {
+                    if (navLinks) {
+                        navLinks.style.opacity = "";
+                    }
+                }
+            }
+
+            updateVisibility();
+
+            window.addEventListener("resize", updateVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logo = document.querySelector(".logo");
+            const menuToggle = document.querySelector(".menu-toggle");
+            const screenWidth = window.innerWidth;
+
+            if (logo) {
+                setTimeout(() => {
+
+                    logo.style.opacity = "1";
+                    menuToggle.style.display = "block";
+                }, 300);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const overlay = document.querySelector(".background");
+
+            if (overlay) {
+
+                overlay.style.opacity = "0";
+
+                setTimeout(() => {
+                    overlay.remove();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>

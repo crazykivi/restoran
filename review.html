@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="header">
+        <a href="index">
+            <div class="logo"><img src="img/logo.png"></div>
+        </a>
+        <div class="nav-links">
+            <a href="index">Главная страница</a>
+            <a href="menu">Меню</a>
+            <a href="booking">Забронировать</a>
+            <a href="about">О нас</a>
+            <a href="review">Отзывы</a>
+            <a href="cart">Корзина</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+    </div>
+    <div class="services-container about">
+        <div id="feedbackFormContainer">
+            <h2>Оставьте ваш отзыв</h2>
+            <form id="feedbackForm">
+                <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                <label for="rating">Ваша оценка:</label>
+                <input type="range" id="rating" name="rating" min="1" max="5" value="5" class="slider">
+                <div id="ratingValue">Оценка: 5</div>
+                <textarea id="comment" name="comment" placeholder="Ваш отзыв" required></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+        <div id="recentFeedbacks">
+            <div id="averageRatingContainer">
+                <h2>Общий рейтинг: <span id="averageRatingValue">Загрузка...</span></h2>
+            </div>
+            <h2>Последние отзывы</h2>
+            <ul id="feedbackList">
+            </ul>
+        </div>
+    </div>
+    <div class="booking-section hidden">
+    </div>
+    <footer class="footer">
+        <div class="info">
+            Приглашаем вас в "Симфония вкусов" — ресторан, где дух Севера оживает в каждой детали.
+        </div>
+        <div class="nav-links-footer">
+            <a href="#">Главная страница</a>
+            <a href="#">Меню</a>
+            <a href="#">Забронировать</a>
+            <a href="#">О нас</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Корзина</a>
+        </div>
+        <div class="hours">
+            Понедельник - Пятница: 10:00 - 22:00 <br>
+            Суббота - Воскресенье: 12:00 - 24:00
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ratingSlider = document.getElementById('rating');
+            const ratingValueDisplay = document.getElementById('ratingValue');
+
+            ratingSlider.oninput = function () {
+                ratingValueDisplay.textContent = 'Оценка: ' + this.value;
+            };
+
+            const feedbackForm = document.getElementById('feedbackForm');
+            feedbackForm.onsubmit = function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                fetch('functions/feedback_process.php', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        loadFeedbacks();
+                    })
+                    .catch(error => console.error('Error:', error));
+            };
+
+            fetchAverageRating();
+
+            function fetchAverageRating() {
+                fetch('functions/get_average_rating.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('averageRatingValue').textContent = data.averageRating;
+                    })
+                    .catch(error => console.error('Error fetching average rating:', error));
+            }
+            /*
+            function loadFeedbacks() {
+                fetch('functions/get_feedbacks.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const feedbackList = document.getElementById('feedbackList');
+                        feedbackList.innerHTML = ''; // Очистка списка
+                        data.forEach(feedback => {
+                            const li = document.createElement('li');
+                            // Создаем строку с именем и датой
+                            const header = document.createElement('div');
+                            const rating = document.createElement('div'); // Исправлено здесь
+                            rating.textContent = `Оценка: ${feedback.rating}`;
+                            header.textContent = `${feedback.name} (${feedback.formatted_date})`;
+                            header.style.fontWeight = 'bold';
+                            rating.style.fontWeight = 'bold';
+
+                            // Создаем элемент для комментария
+                            const comment = document.createElement('div');
+                            comment.textContent = feedback.comment;
+
+                            li.appendChild(header);
+                            li.appendChild(rating); // Добавляем оценку в список
+                            li.appendChild(comment);
+                            feedbackList.appendChild(li);
+                        });
+                    })
+                    .catch(error => console.error('Error loading feedbacks:', error));
+            }
+            */
+            const monthNames = {
+                "January": "Январь",
+                "February": "Февраль",
+                "March": "Март",
+                "April": "Апрель",
+                "May": "Май",
+                "June": "Июнь",
+                "July": "Июль",
+                "August": "Август",
+                "September": "Сентябрь",
+                "October": "Октябрь",
+                "November": "Ноябрь",
+                "December": "Декабрь"
+            };
+            function loadFeedbacks() {
+                fetch('functions/get_feedbacks.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const feedbackList = document.getElementById('feedbackList');
+                        feedbackList.innerHTML = '';
+                        data.forEach(feedback => {
+                            const li = document.createElement('li');
+                            const dateParts = feedback.formatted_date.split(" ");
+                            const month = dateParts[0];
+                            const year = dateParts[1];
+                            const translatedMonth = monthNames[month];
+
+                            const header = document.createElement('div');
+                            const rating = document.createElement('div');
+                            rating.textContent = `Оценка: ${feedback.rating}`;
+                            header.textContent = `${feedback.name} (${translatedMonth} ${year})`;
+                            header.style.fontWeight = 'bold';
+                            rating.style.fontWeight = 'bold';
+
+                            // Создаем элемент для комментария
+                            const comment = document.createElement('div');
+                            comment.textContent = feedback.comment;
+
+                            li.appendChild(header);
+                            li.appendChild(rating);
+                            li.appendChild(comment);
+                            feedbackList.appendChild(li);
+                        });
+                    })
+                    .catch(error => console.error('Error loading feedbacks:', error));
+            }
+            loadFeedbacks();
+
+        });
+    </script>
+    <script>
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        const logo = document.querySelector('.logo');
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth >= 1000) {
+                if (scrollTop > lastScrollTop) {
+                    header.classList.add('header-hide');
+                    logo.style.opacity = 0;
+                } else {
+                    header.classList.remove('header-hide');
+                    logo.style.opacity = 1;
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+    <script>
+        function scrollToWithOffset(selector, offset) {
+            const element = document.querySelector(selector);
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            const header = document.querySelector('.header');
+            header.style.transform = 'translateY(0)';
+            function checkVisibility() {
+                const bookingSection = document.querySelector(".booking-section");
+                const boundingBooking = bookingSection.getBoundingClientRect();
+
+                if (boundingBooking.top < window.innerHeight) {
+                    bookingSection.classList.remove("hidden");
+                    bookingSection.classList.add("visible");
+                    window.removeEventListener("scroll", checkVisibility);
+                }
+
+                document.querySelectorAll(".service, .section").forEach(element => {
+                    const bounding = element.getBoundingClientRect();
+
+                    if (bounding.top < window.innerHeight - 250) {
+                        element.classList.remove("hidden");
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            const bookingSection = document.querySelector(".booking-section");
+            bookingSection.classList.add("hidden");
+
+            document.querySelectorAll(".service, .section").forEach(element => element.classList.add("hidden"));
+
+            checkVisibility();
+            window.addEventListener("scroll", checkVisibility);
+        };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('show');
+            });
+
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            function checkVisibility() {
+                let delay = 0;
+
+                thumbnails.forEach((thumbnail, index) => {
+                    if (!thumbnail.classList.contains('animated')) {
+                        const bounds = thumbnail.getBoundingClientRect();
+
+                        if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+                            setTimeout(() => {
+                                thumbnail.classList.add('visible-gallery');
+                                thumbnail.classList.add('animated');
+                            }, 100 * delay++);
+                        }
+                    }
+                });
+            }
+            checkVisibility();
+
+            window.addEventListener('scroll', checkVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateWidth() {
+                if (window.innerWidth <= 1000) {
+                    navLinks.style.width = (window.innerWidth + 1) + "px";
+                } else {
+                    navLinks.style.width = "";
+                }
+            }
+
+            updateWidth();
+            window.addEventListener("resize", updateWidth);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navLinks = document.querySelector(".nav-links");
+
+            function updateVisibility() {
+                const screenWidth = window.innerWidth;
+
+                if (screenWidth > 1000) {
+
+                    const navLinksOpacity = getComputedStyle(navLinks).opacity;
+
+                    if (navLinksOpacity !== "1") {
+                        navLinks.style.opacity = "0";
+
+                        setTimeout(() => {
+                            navLinks.style.opacity = "1";
+                        }, 300);
+                    }
+                } else {
+                    if (navLinks) {
+                        navLinks.style.opacity = "";
+                    }
+                }
+            }
+
+            updateVisibility();
+
+            window.addEventListener("resize", updateVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logo = document.querySelector(".logo");
+            const menuToggle = document.querySelector(".menu-toggle");
+            const screenWidth = window.innerWidth;
+
+            if (logo) {
+                setTimeout(() => {
+
+                    logo.style.opacity = "1";
+                    menuToggle.style.display = "block";
+                }, 300);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const overlay = document.querySelector(".background");
+
+            if (overlay) {
+
+                overlay.style.opacity = "0";
+
+                setTimeout(() => {
+                    overlay.remove();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>
